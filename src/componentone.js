@@ -16,7 +16,7 @@ class componentone extends React.Component {
 
     const token = '00D2v000001YYJR!ARkAQM4EsiVNoQY92NFH7ZDG1ZHCXVoHVMKTkm784Q98ziIzmh12B1WcB1U9ik6L2A0jCQhyNXkmpM7TaMp85bT3_aP0aO05';
 
-    axios.get(`https://crazydev-dev-ed.my.salesforce.com/services/data/v51.0/query/?q=SELECT+Id,LastName,Email,Phone+FROM+Contact+Limit+10`,{headers:{'Authorization': `Bearer ${token}`},mode:'cors'})
+    axios.get(`https://crazydev-dev-ed.my.salesforce.com/services/data/v51.0/query/?q=SELECT+Id,LastName,Email,Phone+FROM+Contact+Limit+10`,{headers:{'Authorization': `Bearer ${token}`,'Access-Control-Allow-Origin': '*'},mode:'cors'})
       .then(res => {
         console.log(res);
       
