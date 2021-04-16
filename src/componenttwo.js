@@ -24,7 +24,7 @@ class componenttwo extends React.Component {
     event.preventDefault();
 
 
-    const token = '00D2v000001YYJR!ARkAQM4EsiVNoQY92NFH7ZDG1ZHCXVoHVMKTkm784Q98ziIzmh12B1WcB1U9ik6L2A0jCQhyNXkmpM7TaMp85bT3_aP0aO05';
+    const token = '00D2v000001YYJR!ARkAQFmnVo7CbiszFAgl5oGtCA9NNZu6ZaGEYHx7kOIndj.Ru6CcC4Z0.2gFMS_GfxiyvQb5L7XLoJ2baw3THsAn7p_Zcnf2';
 
 
     axios.post('https://crazydev-dev-ed.my.salesforce.com/services/apexrest/ReactRestClass', {name:this.state.name},{headers:{'Authorization':`Bearer ${token}`,'content-Type':'application/json'},mode:'cors'})
