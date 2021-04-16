@@ -47,7 +47,7 @@ const columns = [
 	</DataTableColumn>,
 ];
 
-class Example extends React.Component {
+class componentone extends React.Component {
 	static displayName = 'DataTableExample';
 
 	state = {
