@@ -1,6 +1,5 @@
 import React from 'react';
-import LCC from 'lightning-container';
-
+import axios from 'axios';
 import IconSettings from '@salesforce/design-system-react/components/icon-settings';
 import Modal from '@salesforce/design-system-react/components/modal'; 
 import Button from '@salesforce/design-system-react/components/button';
