@@ -1,22 +1,14 @@
 import React from 'react';
 
-import LCC from "lightning-container";
-
-
 import DataTable from '@salesforce/design-system-react/components/data-table'; 
 import DataTableColumn from '@salesforce/design-system-react/components/data-table/column';
 import DataTableCell from '@salesforce/design-system-react/components/data-table/cell';
 import IconSettings from '@salesforce/design-system-react/components/icon-settings';
-import Button from '@salesforce/design-system-react/components/button'; 
-
-
-
-
 
 const CustomDataTableCell = ({ children, ...props }) => (
 	<DataTableCell {...props}>
 		<a
-			href
+			href="javascript:void(0);"
 			onClick={(event) => {
 				event.preventDefault();
 			}}
@@ -55,45 +47,55 @@ const columns = [
 	</DataTableColumn>,
 ];
 
-class componentone extends React.Component {
+class Example extends React.Component {
 	static displayName = 'DataTableExample';
 
-    state = {
-		accounts: [],
+	state = {
+		items: [
+			{
+				id: '8IKZHZZV80',
+				opportunityName: 'Cloudhub',
+				accountName: 'Cloudhub',
+				closeDate: '4/14/2015',
+				stage: 'Prospecting',
+				confidence: '20%',
+				amount: '$25k',
+				contact: 'jrogers@cloudhub.com',
+			},
+			{
+				id: '5GJOOOPWU7',
+				opportunityName: 'Cloudhub + Anypoint Connectors',
+				accountName: 'Cloudhub',
+				closeDate: '4/14/2015',
+				stage: 'Prospecting',
+				confidence: '20%',
+				amount: '$25k',
+				contact: 'jrogers@cloudhub.com',
+			},
+			{
+				id: '8IKZHZZV81',
+				opportunityName: 'Cloudhub',
+				accountName: 'Cloudhub',
+				closeDate: '4/14/2015',
+				stage: 'Prospecting',
+				confidence: '20%',
+				amount: '$25k',
+				contact: 'jrogers@cloudhub.com',
+			},
+		],
 	};
 
-    callApex() {
-        LCC.callApex("ApexController.getAccount",
-        
-                     this.handleAccountQueryResponse,
-                     {escape: true});
-      }
-    
-      handleAccountQueryResponse(result, event) {
-        if (event.status) {
-          this.setState({accounts: result});
-        }
-        else if (event.type === "exception") {
-          console.log(event.message + " : " + event.where);
-        }
-      }
-    
-
-	
 	render() {
 		return (
-            <div>
 			<IconSettings iconPath="/assets/icons">
 				<div style={{ overflow: 'auto' }}>
-                <h1 style={{marginLeft:"300px",color:"black", fontSize:"16px"}}><b></b></h1>
-                <Button label="Brand" variant="brand" onClick={this.callApex}/>
-					<DataTable items={this.state.accounts} id="DataTableExample-1-default">
+					<DataTable items={this.state.items} id="DataTableExample-1-default">
 						{columns}
 					</DataTable>
 				</div>
 			</IconSettings>
-            </div>
 		);
 	}
 }
+
 export default componentone;
