@@ -19,6 +19,8 @@ class componenttwo extends React.Component {
   handleChange = event => {
     this.setState({ name: event.target.value });
   }
+  
+  
 
   handleSubmit = event => {
     event.preventDefault();
@@ -31,6 +33,9 @@ class componenttwo extends React.Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+	    alert('contact created successfully');
+	    
+	    
       })
   }
 
@@ -43,7 +48,7 @@ class componenttwo extends React.Component {
 			<IconSettings iconPath="/assets/icons">
 				<div>
 					<Button
-						label="Create Account Record"
+						label="Create Contact Record"
 						onClick={this.toggleOpen}
 					/>
 					<Modal
@@ -53,7 +58,7 @@ class componenttwo extends React.Component {
 							<Button label="Save" variant="brand" onClick={this.handleSubmit} />,
 						]}
 						onRequestClose={this.toggleOpen}
-						heading="New Account"
+						heading="New Contact"
 					>
 						<section className="slds-p-around_large">
 							<div className="slds-form-element slds-m-bottom_large">
