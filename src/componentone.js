@@ -1,101 +1,47 @@
 import React from 'react';
 
-import DataTable from '@salesforce/design-system-react/components/data-table'; 
-import DataTableColumn from '@salesforce/design-system-react/components/data-table/column';
-import DataTableCell from '@salesforce/design-system-react/components/data-table/cell';
-import IconSettings from '@salesforce/design-system-react/components/icon-settings';
+import axios from 'axios';
 
-const CustomDataTableCell = ({ children, ...props }) => (
-	<DataTableCell {...props}>
-		<a
-			href="javascript:void(0);"
-			onClick={(event) => {
-				event.preventDefault();
-			}}
-		>
-			{children}
-		</a>
-	</DataTableCell>
-);
-CustomDataTableCell.displayName = DataTableCell.displayName;
-
-const columns = [
-	<DataTableColumn
-		key="opportunity"
-		label="Opportunity Name"
-		property="opportunityName"
-	>
-		<CustomDataTableCell />
-	</DataTableColumn>,
-
-	<DataTableColumn
-		key="account-name"
-		label="Account Name"
-		property="accountName"
-	/>,
-
-	<DataTableColumn key="close-date" label="Close Date" property="closeDate" />,
-
-	<DataTableColumn key="stage" label="Stage" property="stage" />,
-
-	<DataTableColumn key="confidence" label="Confidence" property="confidence" />,
-
-	<DataTableColumn key="amount" label="Amount" property="amount" />,
-
-	<DataTableColumn key="contact" label="Contact" property="contact">
-		<CustomDataTableCell />
-	</DataTableColumn>,
-];
 
 class componentone extends React.Component {
-	static displayName = 'DataTableExample';
 
-	state = {
-		items: [
-			{
-				id: '8IKZHZZV80',
-				opportunityName: 'Cloudhub',
-				accountName: 'Cloudhub',
-				closeDate: '4/14/2015',
-				stage: 'Prospecting',
-				confidence: '20%',
-				amount: '$25k',
-				contact: 'jrogers@cloudhub.com',
-			},
-			{
-				id: '5GJOOOPWU7',
-				opportunityName: 'Cloudhub + Anypoint Connectors',
-				accountName: 'Cloudhub',
-				closeDate: '4/14/2015',
-				stage: 'Prospecting',
-				confidence: '20%',
-				amount: '$25k',
-				contact: 'jrogers@cloudhub.com',
-			},
-			{
-				id: '8IKZHZZV81',
-				opportunityName: 'Cloudhub',
-				accountName: 'Cloudhub',
-				closeDate: '4/14/2015',
-				stage: 'Prospecting',
-				confidence: '20%',
-				amount: '$25k',
-				contact: 'jrogers@cloudhub.com',
-			},
-		],
-	};
+  state={
+    persons:[]
 
-	render() {
-		return (
-			<IconSettings iconPath="/assets/icons">
-				<div style={{ overflow: 'auto' }}>
-					<DataTable items={this.state.items} id="DataTableExample-1-default">
-						{columns}
-					</DataTable>
-				</div>
-			</IconSettings>
-		);
-	}
+
+  }
+
+
+  componentDidMount() {
+
+    const token = '00D2v000001YYJR!ARkAQM4EsiVNoQY92NFH7ZDG1ZHCXVoHVMKTkm784Q98ziIzmh12B1WcB1U9ik6L2A0jCQhyNXkmpM7TaMp85bT3_aP0aO05';
+
+    axios.get(`https://crazydev-dev-ed.my.salesforce.com/services/data/v51.0/query/?q=SELECT+Id,LastName,Email,Phone+FROM+Contact+Limit+10`,{headers:{'Authorization': `Bearer ${token}`},mode:'cors'})
+      .then(res => {
+        console.log(res);
+      
+        console.log(res.data.records[0].LastName);
+
+        this.setState({persons:res.data.records})
+       
+      })
+  }
+
+
+  render() {
+    return (
+
+      <div >
+      
+      { this.state.persons.map(person => <table style={{border: "1px solid black"}}><tr><td width="100">{person.LastName}</td>
+      
+        <td width="100">{person.FirstName}</td> <td width="100">{person.Phone}</td><td width="300">{person.Email}</td></tr>
+      
+      </table>)}
+    
+      </div>
+    
+    )
+  }
 }
-
 export default componentone;
