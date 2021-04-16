@@ -12,36 +12,28 @@ import Button from '@salesforce/design-system-react/components/button';
 class componenttwo extends React.Component {
 	static displayName = 'ModalExample';
 
+
 	state = {
-		isOpen: false,
-		accName:"",
-		accNameString:""
-		
-	};
+    name: '',
+  }
+
+  handleChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
 
 
+    const token = '00D2v000001YYJR!ARkAQM4EsiVNoQY92NFH7ZDG1ZHCXVoHVMKTkm784Q98ziIzmh12B1WcB1U9ik6L2A0jCQhyNXkmpM7TaMp85bT3_aP0aO05';
 
-	callApexTwo(){
 
-		LCC.callApex("ApexController.createAccount",
-		this.state.accName,
-		this.handleAccountCreateResponse,
-		{escape: true});
-	}
-
-	onAccountNameCreateChange(e) {
-		this.setState({accName: e.target.value});
-	  }
-	
-	
-	handleAccountCreateResponse(result, event) {
-	  if (event.status) {
-		this.setState({accNameString: result});
-	  }
-	  else if (event.type === "exception") {
-		console.log(event.message + " : " + event.where);
-	  }
-	}
+    axios.post('https://crazydev-dev-ed.my.salesforce.com/services/apexrest/ReactRestClass', {name:this.state.name},{headers:{'Authorization':`Bearer ${token}`,'content-Type':'application/json'},mode:'cors'})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+  }
 
 	toggleOpen = () => {
 		this.setState({ isOpen: !this.state.isOpen });
@@ -59,7 +51,7 @@ class componenttwo extends React.Component {
 						isOpen={this.state.isOpen}
 						footer={[
 							<Button label="Cancel" onClick={this.toggleOpen} />,
-							<Button label="Save" variant="brand" onClick={this.callApexTwo} />,
+							<Button label="Save" variant="brand" onClick={this.handleSubmit} />,
 						]}
 						onRequestClose={this.toggleOpen}
 						heading="New Account"
@@ -75,7 +67,7 @@ class componenttwo extends React.Component {
 										className="slds-input"
 										type="text"
 										placeholder="Enter name"
-										onChange={e => this.onAccountNameCreateChange(e)}
+										onChange={this.handleChange}
 									/>
 								</div>
 							</div>
